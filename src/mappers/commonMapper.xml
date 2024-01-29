@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="common">
+	
+	<resultMap type="hashmap" id="mainProductMap">
+		<result column="PRODUCT_CD" 		 property="productCd"/>
+		<result column="PRODUCT_NM" 		 property="productNm"/>
+		<result column="PRICE"    		 property="price"/>
+		<result column="BRAND"    		 property="brand"/>
+		<result column="VIEWS"    		 property="views"/>
+		<result column="LIKES"    		 property="likes"/>
+		<result column="DISCOUNT_RATE"   property="discountRate"/>
+		<result column="PRODUCT_FILE_NAME1" property="productFileName1"/>
+		<result column="UPDATE_DT"			property="updateDt"/>
+		<result column="SELLER_NM" property="sellerNm"/>
+	</resultMap>
+	
+	<select id="selectListBestSeller" resultMap="mainProductMap">
+	    SELECT 
+	    		P.PRODUCT_CD AS PRODUCT_CD,
+	    		P.PRODUCT_NM AS PRODUCT_NM,
+	    		P.PRICE AS PRICE,
+	    		P.BRAND AS BRAND,
+	    		P.VIEWS AS VIEWS,
+	    		P.LIKES AS LIKES,
+	    		P.DISCOUNT_RATE AS DISCOUNT_RATE,
+	    		P.PRODUCT_FILE_NAME1 AS PRODUCT_FILE_NAME1,
+	    		P.UPDATE_DT AS UPDATE_DT,
+	    		S.SELLER_NM AS SELLER_NM
+	    FROM 
+	    		PRODUCT P
+	    INNER JOIN SELLER S
+	    				ON P.SELLER_ID = S.SELLER_ID
+	    ORDER BY
+	    		PRICE DESC
+		LIMIT 
+				3
+	</select>
+	
+ 	<select id="selectListMostViewed" resultMap="mainProductMap">
+	    SELECT 
+	    		P.PRODUCT_CD AS PRODUCT_CD,
+	    		P.PRODUCT_NM AS PRODUCT_NM,
+	    		P.PRICE AS PRICE,
+	    		P.BRAND AS BRAND,
+	    		P.VIEWS AS VIEWS,
+	    		P.LIKES AS LIKES,
+	    		P.DISCOUNT_RATE AS DISCOUNT_RATE,
+	    		P.PRODUCT_FILE_NAME1 AS PRODUCT_FILE_NAME1,
+	    		P.UPDATE_DT AS UPDATE_DT,
+	    		S.SELLER_NM AS SELLER_NM
+	    FROM 
+	    		PRODUCT P
+	    INNER JOIN SELLER S
+	    				ON P.SELLER_ID = S.SELLER_ID
+	    ORDER BY
+	    		DISCOUNT_RATE DESC
+		LIMIT 
+				3
+	</select>
+	
+	<select id="selectListNewArrivals" resultMap="mainProductMap">
+	    SELECT 
+	    		P.PRODUCT_CD AS PRODUCT_CD,
+	    		P.PRODUCT_NM AS PRODUCT_NM,
+	    		P.PRICE AS PRICE,
+	    		P.BRAND AS BRAND,
+	    		P.VIEWS AS VIEWS,
+	    		P.LIKES AS LIKES,
+	    		P.DISCOUNT_RATE AS DISCOUNT_RATE,
+	    		P.PRODUCT_FILE_NAME1 AS PRODUCT_FILE_NAME1,
+	    		P.UPDATE_DT AS UPDATE_DT,
+	    		S.SELLER_NM AS SELLER_NM
+	    FROM 
+	    		PRODUCT P
+	    INNER JOIN SELLER S
+	    				ON P.SELLER_ID = S.SELLER_ID
+	    ORDER BY
+	    		UPDATE_DT DESC
+		LIMIT 
+				3
+	</select>
+	
+	<select id="selectListHotSales" resultMap="mainProductMap">
+	    SELECT 
+	    		P.PRODUCT_CD AS PRODUCT_CD,
+	    		P.PRODUCT_NM AS PRODUCT_NM,
+	    		P.PRICE AS PRICE,
+	    		P.BRAND AS BRAND,
+	    		P.VIEWS AS VIEWS,
+	    		P.LIKES AS LIKES,
+	    		P.DISCOUNT_RATE AS DISCOUNT_RATE,
+	    		P.PRODUCT_FILE_NAME1 AS PRODUCT_FILE_NAME1,
+	    		P.UPDATE_DT AS UPDATE_DT,
+	    		S.SELLER_NM AS SELLER_NM
+	    FROM 
+	    		PRODUCT P
+	    INNER JOIN SELLER S
+	    				ON P.SELLER_ID = S.SELLER_ID
+	    ORDER BY
+	    		DISCOUNT_RATE DESC
+		LIMIT 
+				3
+	</select>
+	
+	<!-- <insert id="insertContact" parameterType="ContactDTO">
+		INSERT INTO CONTACT(
+				NAME,
+				EMAIL,
+				SUBJECT,
+				CONTENT,
+				REG_DT
+		)
+		VALUES (
+				#{name},
+				#{email},
+				#{subject},
+				#{content},
+				NOW()
+		)
+	</insert>
+	
+	<select id="selectListContact" resultType="ContactDTO">
+		SELECT
+				*
+		FROM
+				CONTACT
+		ORDER BY
+				REG_DT DESC
+	</select>
+	
+	<select id="selectOneContact" parameterType="int" resultType="ContactDTO">
+		SELECT
+				*
+		FROM
+				CONTACT
+		WHERE
+				CONTACT_CD = #{contactCd}
+	</select>
+	
+	<delete id="deleteContact" >
+		DELETE FROM
+				CONTACT
+		WHERE
+				CONTACT_CD IN 
+		<foreach collection="array" item="contactCd" separator="," open="("  close=")" >
+				#{contactCd}
+		</foreach>
+	</delete> -->
+	
+</mapper>

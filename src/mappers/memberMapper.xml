@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="member">
+
+	<select id="selectLogin" resultType="MemberDTO" parameterType="String">
+		SELECT 
+				* 
+		FROM 
+				MEMBER 
+		WHERE 
+				MEMBER_ID = #{memberId}		
+	</select>
+	
+	<select id="selectDuplicatedId" parameterType="String" resultType="String">
+	   SELECT 
+	   			MEMBER_ID
+	   FROM 
+	   			MEMBER
+	   WHERE 
+	   			MEMBER_ID = #{memberId}
+	</select>
+	
+	<insert id="insertMember" parameterType="MemberDTO">
+    	INSERT INTO 
+    			MEMBER 
+    	VALUES (
+				#{memberId},
+				#{memberNm},
+				#{passwd},
+             	#{sex},
+               	#{dateBirth},
+               	#{hp},
+                #{smsstsYn},
+                #{email},
+                #{emailstsYn},
+                #{zipcode},
+                #{roadAddress},
+                #{jibunAddress},
+                #{namujiAddress},
+                0,
+                NOW()
+        )
+  	</insert>
+  	
+<!--   	<select id="selectMyOrderCnt" resultType="int" parameterType="String">
+	  		SELECT
+	  				COUNT(*)
+	  		FROM
+	  				`ORDER`
+	  		WHERE
+	  				MEMBER_ID = #{memberId}
+  	</select> -->
+  	
+  	<select id="selectMyCartCnt" resultType="int" parameterType="String">
+	  		SELECT
+	  				COUNT(*)
+	  		FROM
+	  				CART
+	  		WHERE
+	  				MEMBER_ID = #{memberId}
+  	</select>
+
+</mapper>
